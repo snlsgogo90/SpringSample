@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+	<!-- *********************************************************************
+	     PropertyPlaceholderConfigurer : 스프링 설정파일에서 프로퍼티 사용을 가능하게 하는 구현체 
+		 *********************************************************************
+	-->  
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:luvlnx/property/common.properties</value>
+			</list>
+		</property>
+		<property name="fileEncoding" value="UTF-8"></property>
+	</bean>
+	
+	
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>classpath:luvlnx/message/message</value>
+			</list>
+		</property>
+		<property name="cacheSeconds">
+			<value>-1</value>
+		</property>
+		<property name="defaultEncoding" value="UTF-8"></property>
+	</bean>
+	
+	<!-- 
+	  request가 갖고 있는 session으로 부터 locale 정보를 가져온다.
+	  session에 값이 없는 경우에는 defaultLocale로 설정된 값을 가져온다.
+	   처음 접근 시에는 session이 없기 때문에, defaultLocale을 읽게 된다.
+	  
+	-->
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="ko"></property>
+	</bean>
+
+</beans>

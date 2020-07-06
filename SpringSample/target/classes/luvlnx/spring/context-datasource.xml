@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!-- *********************************************************************
+	     JndiObjectFactoryBean : WAS에서 관리하는 DataSource를 Lookup하기 위한 구현체
+	     *********************************************************************
+	     // resourceRef 속성이 true인 경우에는 jndi명 앞에 java:comp/env/ 자동으로 추가
+	-->
+	<bean id="studentDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<!-- property name="jndiName">
+			<value>${DATASOURCE_NAME}</value>
+		</property -->
+		<property name="jndiName" value="${DATASOURCE1_NAME}"/>
+		<property name="resourceRef" value="true"/>	
+	</bean>
+	
+	<bean id="empdeptDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="${DATASOURCE2_NAME}"/>
+		<property name="resourceRef" value="true"/>	
+	</bean>
+
+
+	<!-- *********************************************************************
+	     SessionFactoryBean : SqlSession 생성을 위한 팩토리
+	     ********************************************************************* -->
+	<bean id="studentSsqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="typeAliasesPackage" value="com.luv.lnx"></property>
+		<property name="dataSource" ref="studentDataSource"></property>
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:luvlnx/sqlmap/${DATABASE_TYPE}/com/luv/lnx/**/*.xml</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="empdeptSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="typeAliasesPackage" value="com.luv.lnx"></property>
+		<property name="dataSource" ref="empdeptDataSource"></property>
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:luvlnx/sqlmap/${DATABASE_TYPE}/com/luv/lnx/**/*.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- *********************************************************************
+	     SqlSession
+	     ********************************************************************* -->
+	<bean id="studentSqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="studentSsqlSessionFactory"></constructor-arg>
+	</bean>
+	<bean id="empdeptSqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="empdeptSqlSessionFactory"></constructor-arg>
+	</bean>
+
+</beans>
