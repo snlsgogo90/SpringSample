@@ -8,11 +8,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.luv.lnx.comm.service.CommonService;
+
 @Controller
 public class CommonController {
 	
 	@Autowired
 	private MessageSource message;
+	
+	@Autowired
+	private CommonService service;
 	
 	@RequestMapping(value = "/comm/main.do")
 	public String main(Locale locale, Model model) {
