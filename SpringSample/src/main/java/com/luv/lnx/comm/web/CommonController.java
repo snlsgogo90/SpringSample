@@ -17,6 +17,9 @@ public class CommonController {
 	@Autowired
 	private MessageSource message;
 	
+	@Autowired
+	private CommonService service;
+	
 	@RequestMapping(value = "/comm/main")
 	public String main(Locale locale, Model model) {
 		System.out.println(locale.toString());

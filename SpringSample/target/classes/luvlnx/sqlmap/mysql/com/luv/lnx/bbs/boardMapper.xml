@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper>
+
+	<insert id="insertBoard" parameterType="boardVo">
+		INSERT INTO BOARD (
+			IDX,
+			NAME,
+			TITLE,
+			READCOUNT,
+			WRITE_DATE,
+			EDIT_DATE
+		) VALUES (
+			0
+		)
+	</insert>
+	
+	<update id="updateBoard" parameterType="boardVo">
+		UPDATE BOARD SET 
+			TITLE = #{title}
+		 WHERE IDX = #{idx}
+	</update>
+	
+	<select id="selectBoardDetail" parameterType="boardVo" resultType="boardVo">
+		SELECT *
+		  FROM BOARD;
+		 WHERE IDX = #{idx}
+	</select>
+	
+	<select id="selectBoardList" parameterType="boardVo" resultType="boardVo">
+		SELECT *
+		  FROM BOARD;
+	</select>
+	
+	<select id="selectBoardListTotalCount" parameterType="boardVo">
+		SELECT COUNT(*)
+		  FROM BOARD;
+	</select>
+
+</mapper>
