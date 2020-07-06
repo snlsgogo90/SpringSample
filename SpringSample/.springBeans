@@ -10,6 +10,7 @@
 		<config>src/main/webapp/WEB-INF/config/dispatcher-servlet.xml</config>
 		<config>src/main/resources/luvlnx/spring/context-message.xml</config>
 		<config>src/main/resources/luvlnx/spring/context-datasource.xml</config>
+		<config>src/main/resources/luvlnx/spring/context-common.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

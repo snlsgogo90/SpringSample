@@ -9,23 +9,24 @@
 	     *********************************************************************
 	     // resourceRef 속성이 true인 경우에는 jndi명 앞에 java:comp/env/ 자동으로 추가
 	-->
-	<bean id="studentDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<!-- property name="jndiName">
 			<value>${DATASOURCE_NAME}</value>
 		</property -->
+	<!-- bean id="studentDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="${DATASOURCE1_NAME}"/>
 		<property name="resourceRef" value="true"/>	
-	</bean>
+	</bean -->
 	
-	<bean id="empdeptDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+	<!-- bean id="empdeptDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="${DATASOURCE2_NAME}"/>
 		<property name="resourceRef" value="true"/>	
-	</bean>
+	</bean -->
 
 
 	<!-- *********************************************************************
 	     SessionFactoryBean : SqlSession 생성을 위한 팩토리
 	     ********************************************************************* -->
+	<!--
 	<bean id="studentSsqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="typeAliasesPackage" value="com.luv.lnx"></property>
 		<property name="dataSource" ref="studentDataSource"></property>
@@ -44,16 +45,19 @@
 			</list>
 		</property>
 	</bean>
+	-->
 	
 	
 	<!-- *********************************************************************
 	     SqlSession
 	     ********************************************************************* -->
+	<!--
 	<bean id="studentSqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="studentSsqlSessionFactory"></constructor-arg>
 	</bean>
 	<bean id="empdeptSqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="empdeptSqlSessionFactory"></constructor-arg>
 	</bean>
+	-->
 
 </beans>
